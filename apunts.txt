@@ -1,0 +1,287 @@
+** React **
+# Es una libreria JS para crear interfaces de usuario para apps web. Desarrollada por Facebook. Corre en el cliente. Te permitirá ordenar tu proyecto mejor por medio de Componentes. Una gran cantidad de herramientas y librerías así como soporte. Componente: HEADER, NAVEGACIÓN, SIDEBAR, ...
+React es una librería que funciona en el frontEnd.
+# Spread operator ... -> combinar dos arreglos en uno. O para hacer una copia de una array (clon) y que no sea modificado el array original.
+# Requisitos para trabajar con react: nodeJS
+# No hace falta instal·lar create-react-app solo hacer lo siguiente para iniciar un proyecto -> npx create-react-app nombre_del_proyecto
+# Dentro de src lo borramos todo menos el index.js. Dentro del index.js quitamos los imports de index.css, el ./App y el serviceWorker. También dentro del index.js solo dejamos el componente principal creado por nosotros.
+# NUNCA HACER UN PUSH EN REACT porqué muta el objeto. 
+
+# Iniciar el servidor
+npm start
+
+** Estructura de react **
+# La carpeta public es donde tenemos los ficheros estáticos.
+# src donde generamos los componentes.
+# <div id="root"></div> -> raíz
+# src/index.js -> archivo principal.
+# src/App.js -> el archivo principal para cargar otros componentes.
+
+** Short-curts y extensiones **
+# imr -> import React from 'react'
+# sfc -> const = () => { }  (Function expresion en el componente)
+# rafc -> Functional component
+# rafcp -> Functional component con propTypes.
+# Usar extensión del navegador para react: react developer tools
+# En react usamos map en vez de foreach. Map porqué retorna un valor y el foreach solo recorre.
+
+** Components **
+# Permiten separar tu código y los elementos de tu interfaz en pequeñas piezas re-utilizables que estarán separadas una de otras.
+# Puedes pasarle datos a un componente por medio de algo llamado Props. Importante es que en React los datos fluyen del componente padre al hijo.
+# Existen 2 tipos de componentes: class component y functional component.
+# Functional components. Ventajas: fáciles de crear, leer. Menos código, Fácil de probar y tiene mejor perfomance. Desventajas: No puedes usar los métodos del ciclo de vida (ComponentDidMount, ComponentDidUpdate), no tienen state i no puedes usar refs.
+# Los componentes escrivir en upperCamelCase ej: MenuItem,...
+# Siempre añadir a inicio -> import React from 'react'
+# Se crean con extensión jsx o js -> jsx utiliza js y html combinado.
+# Llamamos el compenente por ejemplo <Componente />
+# class="" en CSS no sino className=""
+# fragment permite añadir más de un componente si usar div's.
+# fragment también se puede añadir como <> .... </>
+# PropTypes permite indicar que props utilizamos.
+# <Link> -> para crear href
+
+** State **
+# Colocamos lo que reaciona a las acciones del usuario.
+# Sintaxis básica para usar state -> const [stateActual, cambioState] = useState(valoresIniciales);
+# El state no se debe modificar directamente.
+# Cada vez que se MODIFICA el state se vuelve a cargar el código (componentes, ...).
+
+** Eventos **
+# onClick, onSubmit, ...
+
+** Métodos del ciclo de vida **
+# ComponentDidMount (el más común. Se ejecuta una vez que todo este listo)
+# Componentwillmount (se ejecuta apenas el componente se carga)
+# ComponentDidUpdate (se ejecuta cuando el componente se actualiza)
+# Componentwillunmount (cuando un componente a sido cargado y este va a ser remplazado "menos utilizado")
+
+** Pruebas unitarias y de integración **
+# Unitarias -> enfocadas en pequeñas funcionalidades.
+# Características de las pruebas -> fáciles de escribir, fáciles de leer, confiables, rápidas y principalmente unitarias.
+# Arrange (Arreglar) -> preparamos el estado inicial. Inicializamos variables, importaciones necesarias. 
+# Act (Actuar) -> aplicamos acciones o estímulos. Llamar métodos, simular clicks, realizar acciones sobre el paso anterior.
+# Assert (Afirmar) -> Observar el comportamiento resultatne. Son los resultados esperados, ej: que algo cambie, algo incremente o bien que nada suceda.
+# Ejecutar prueba -> npm run test
+
+** React Hooks **
+# Disponibles desde la versión 16.8
+# Te permitirán actualizar el State sin necesidad de crear un Class Component.
+# La cantidad de código es menor.
+# función useState -> cuenta con 2 partes. El state actual y el cambió de state (setState).
+# Beneficios de los hooks: menos cantidad de código, mayor facilidad para implementar reducers, administrar el state y el context.
+# Se dividen en 2 grupos los hooks: (useState, useEffect) y avanzados: useContext, useRef, useReducer, userCallback y useMemo.
+# Los hooks no se pueden utilizar de forma condicional.
+# useEffect -> para realizar ciertas operaciones cuando el state cambia. Añadir [] para que se ejecute una vez.
+# useEffect unmount -> poniendo un return en el useEffect finalizamos el useEffect.
+# useRef -> mantener una referencia una posición de memória de la computadora. Necessitamos una valor de una variable que no redibuje todo. La diferencia con un useState es que este no hace que el componente se vuelva a procesar (renderizar) por canviar su valor.
+# useLayoutEffect -> es parecido al useEffect pero se dispara de forma síncrona después de todas las mutaciones del DOM.
+# React.memo -> Es una función y evita renderizar si las propiedades son las mismas de un componente. Solo actualiza si sus propiedades estan cambiando.
+# useMemo -> memorizamos el valor y solo canvia si este valor es modificado.
+# useCallback -> parecido al memo pero este se utiliza para funciones.
+# useLocation -> información de la url por parámetros (?q=buscar).
+
+** Reducer **
+# Es una función común y corriente (No puede utilizar tareas asíncronas). Debe de retonar un nuevo estado. Usualmente sólo recibe dos argumentos (El valor inicial (initialState) y la acción a ejecutar). No debe de llamar localStorage o sessionStorage dentro del reducer. Su funcionalidad principal es centralizar todas las acciones que modifican el state.
+# Reducer Funcionamento: " 0. state inicial" despues el state va a pasar esos valores a la "1. página o vista". Esta página va a agregar un "3. action -> agregar un valor" y este llama al "4. reducer" que tiene todas las "actions" a realizar, por ej: agregar, borrar o actualizar y vuelve a empezar. El objetivo es que toda la infomarción fluya en una sola vía.
+# useReducer -> se puede pensar como una alternativa a useState. useReducer para proyectos complejos. Dispatch -> ayuda a disparar las acciones hacia el reducer.
+# useParams -> ponemos recoger el parámetro pasado por url.
+
+** Context **
+# Disponible desde la versión 16.3
+# Cuenta con un hook llamado useContext
+# Permite pasar state o funciones desde el componente principal hasta los hijos sin necessidad de pasarlo por cada componente como se hace con props.
+# También se puede actualizar el state desde el hijo o una función que lo actualice.
+# Si el proyecto es sencillo mejor props.
+# Context hace un poco más complicada la reutilización de componentes.
+# Se utiliza CreateContext que es un componente para crear el context y añadirlo en el router. useContext para acceder a nuestro context creado.
+# Palabras clave: Provider -> proveer información a nuestros hijos. Consumer -> donde se consumen los datos o se utilizan las funciones.
+
+** Custom Hook **
+# Es creado por nosotros. Se llama al inicio como " use ".
+# Una forma de extraer lógica de algún componente de forma que sea sencilla utilizarla otra vez.
+# Todo centralizado en un mismo lugar.
+# Siempre los creamos dentro de una carpeta llamada /hooks/ .
+
+** Route react **
+# Permite trabajar con distintas URL's .
+# npm install react-router-dom
+# <Redirect to="/" /> -> sino se encuentra ninguna ruta valida redireciona a / .
+# exact -> indica que la url tiene que coincidir exactamente para acceder al componente.
+# Link y NavLink son lo mismo pero el NavLink permite trabajar con el estilo active para marcar el menú seleccionado. Después añadimos activeClassName donde indicamos la clase de bootstrap llamada active.
+# history.push() -> Empuja una nueva entrada en la pila del historial.
+# history.replace() -> Reemplaza la entrada actual en la pila del historial
+# history.goBack() -> Vuelve atras.
+
+** Condicional JS **
+# { show && <MultipleCustomHooks /> } -> Si tenemos show como true que se muestre el componente.
+# action? -> si tiene valor haz algo.
+
+** Helper **
+# Es un archivo que contiene ciertas funciones que se pueden reatilizar en diferentes lados. Evite que los componentes queden cargados.
+
+** QueryString **
+# Ej: search?q=buscar&geo=1045
+# npm install query-string
+# Permite obtener el query string por ejemplo q=buscar obtemos el string buscar.
+
+** Styled Components **
+# Permite mezclar css con js.
+# npm i @emotion/styled @emotion/core
+
+** Animaciones React **
+# npm i react-transition-group
+
+** Axios **
+# Para generar peticiones
+# npm install axios
+
+** SASS **
+# npm install node-sass -> para trabjar con sass y react.
+
+** Validador de campos **
+# npm i validator -> para validar campos como el correo electrónico
+
+** REDUX **
+# Redux te permitirá manejar el state de tus apps más fácil conforme van creciendo. Te ayuda a manejar los datos conforme a las acciones realizadas por el usuario.
+# Caracteristicas: Solo se tiene un state principal. El state cambia de acuerdo a lo que sucede en la interfaz de usuario. Solo ciertas funciones cambian el state. El usuario es el que utiliza estas funciones y cambia el state. Solo se realiza un cambio a la vez.
+# Cuando utilizar Redux: Si tu app es sencilla y pequeña no necesitas redux (Utiliza hooks o context). Si tu proyecto es grande y será mantenido por varias personas, redux será de gran ayuda.
+
+** Principios de REDUX **
+# Solo existe un store con todo el state de la app. Los componentes / vistats no modifican el state directamente. El state se modifica por medio de funciones.
+# Terminología de REDUX: - Store -> contiene el state (1 por app). - Dispatch -> ejecuta una acción que actualizará el state. - Action -> objetos JS, tienen un tipo y payload (datos que modifican el state). Subscribe -> similar a un event listener para el state (escucha los cambios). - Reducers -> Funciones, saben que hacer con las acciones y el payload.
+# diagrama.jpg -> más info.
+# npm install react-redux redux redux-thunk -> redux es la libreria i react-redux funciones para conectar nuestra app con redux. Thunk es un middleware para trabajar de forma asíncrona (por ejemplo con API's). Se configura en el store.
+# react-redux 7.1.3 -> trabaja con hooks
+# El store es donde esta la información que mis componentes consumirán (vamos al store cuándo necesitamos información). El store proporciona el state. El dispatcher recibe la información del action y se lo manda al reducer y genera un nuevo state. Proceso síncrono. Si tenemos que trabajar con un proceso asíncrono usamos un middleware (API) dentro del dispatcher.
+# El provider es como el useContext que proporciona la información (store) a toda la app.
+
+** Práctica REDUX **
+# Tenemos un store este toma los reducers. Podemos tener múltiples reducers pero al final cada parte de la app tendra su propio reducer i cada reducer tiene su propio state. Si requerimos más de un reducer usamos combineReducers porque en el store sólo le podemos pasar uno. Finalmente los datos van a fluir desde el provider utilizando el store. El store es el que va a tener todo el state y solamente hay un store por app.
+# Los types solo describen lo que pasa en la app. Se utilizan tanto el action como en el reducer (modificar el state de accuerdo a lo que succede).
+# Actions modifica el state.
+# useDispatch -> manda a ejecutar las acciones que tengamos. 
+# useSelector -> una forma en que vamos a acceder al state dentro del componente.
+# Payload -> la parte que modifica el state.
+# getState() -> Accedemos al state del store con getState proporcionado por thunk.
+
+** Pasos de REDUX **
+# - Primero crear el type. - Crear el action. - Añadir la acción en el reducer. - Si el reducer es nuevo añadirlo en el store. - Llamar el dispatch.
+
+** Gatsby **
+# Para sitios estáticos con React. Su principal caractéristica es la velocidad.
+
+** Graphql **
+# Permite tener los datos desde un CMS sin necesidad de realizar una consulta a una BD cada vez que el usuario visita el sitio web ya que crea archivos estáticos.
+
+** moment **
+# Devuelve el dia, hora, etc...
+
+** Modal (Popup react) **
+# npm i react-modal
+
+** High order component **
+# Dentro del mismo componente tenemos un formulario o componentes.
+
+** Sweet alert **
+npm install sweetalert --save
+
+** FrontEnd **
+# npx create-next-app _nombreProyecto_
+# npm install react-router-dom
+# npm i react-modal 
+# npm install react-redux redux redux-thunk
+
+** Backend **
+# npm init -y -> package.json . Punto de entrada en node.
+# npm i nodemon -g -> compilar automaticamente cada cambio que realizamos.
+# npm run dev -> configurado en package.json para cargar el nodemon automaticamente.
+# npm i express
+# .env -> variables de entorno.
+# npm i dotenv -> para acceder a las variables de entorno que tiene nuestra APP.
+# Endpoints -> las peticiones que habilitamos para que los usuarios pueden acceder a las rutas.
+# npm i express-validator -> permite validar campos de forma sencilla.
+# mongo atlas -> es el servicio de mongodb en la nube.
+# mongoose -> facilita el trabajo con mongodb
+# npm i mongoose
+# mongoose automáticamente crea tablas en plural.
+# npm i bcryptjs -> para encriptar passwords.
+# JWT -> permite manejar el estado de la sesión de forma pasiva.
+# npm i jsonwebtoken
+# npm i cors -> restringir el acceso de las apis
+# .populate() -> mira la relación con el id.
+
+** Iniciar localmente frontEnd y BackEnd **
+# FrontEnd -> npm start
+# BackEnd -> npm run dev -> para trabajar con nodemon o npm start
+
+** Subir backend a heroku **
+# Primero tenemos que subir el proyecto a github hasta hacer el commit! .
+# Creamos una cuenta en heroku.
+# En el package.json del backend tiene que tener el start="node index.js"
+# En heroku hacemos click en creat new app.
+# Utilizamos la opción Heroku Git .
+# Instalar heroku CLI para windows, etc...
+# En la terminal (carpeta del proyecto) -> heroku login
+# heroku git:remote -a _nombreProyecto_
+# git push heroku master
+# Despues de esto nos proporciona una URL que es el repositorio de heroku.
+# Para ver la app accedemos a open app.
+# heroku logs -n 1000 --tails -> para ver logs desde la terminal.
+
+** Compilar codigo para subir el FrontEnd a heroku **
+# npm run build
+# El comando anterior crea una carpeta build. Ponemos el contenido de build en la carpeta public del backend.
+# Recordar modificar la variable de entorno que apunta al backend.
+
+** Subir app react **
+# Podemos utilizar netlify o github pages para subir l'app.
+# npm run build -> crea l'app para producción. Se crea una carpeta llamada " build " para subir.
+
+** JSON **
+# JSON.stringify -> convertir a JSON
+
+** OTHER **
+
+** REST API **
+# Endpoints o urls para hacer operaciones CRUD.
+# Ex: GET, POST, PUT, DELETE
+# Realizar consultas API con React: Fetch API y Ajax, Axios o JQuery.
+
+** JSON server **
+# Permite crear un API FAKE.
+# npm install -g json-server
+# Para convertir a una API: json-server db.json --port 4000
+
+** SSR (Server Side Rendering) **
+# En SSR es el servidor el que se encarga de generar el HTML. 
+# En el Client Rendering es el navegador el que se encarga de generar el HTML.
+# Beneficios SSR: El sitio web o aplicación carga más rápido ya que los recursos de la computadora no son utilizados, sino los del servidor. Se recomienda para APPs grandes. Mejora el SEO.
+
+** NEXT.JS **
+# Un framework de react que permite crea app webs utilizando un servicio llamado server site rendering (SSR).
+# Caracterísitcas principales: Server Side Rendering, Code Splitting y Lazy Loading a los components, Rounting en base a los archivos, Soporte CSS, Hot reload (actualiza el navegador automaticamente), URL's limpias.
+# SSR -> Es el servidor el que se encarga de generar el HTML. El sitio web o app carga más rápido ya que los recursos de la computadora no son utilizados sino los del servidor. Se recomienda para app grandes o si la app va a crecer en el futuro. Mejora el SEO. Las dos opciones que tenemos para trabajar con SSR es NEXT.js i Gatsby.
+# VueJS y AngularJS también tienen sus alternativas SSR.
+# npx create-next-app _nombreProyecto_ -> crear un proyecto no next.js .
+# Iniciar proyecto -> npm run dev
+# Los archivos que tenemos dentro de pages seran las páginas que se iran creando. Si creamos un archivo dentro de pages automaticamente se genera una página con url.
+# npm i @emotion/core @emotion/styled babel-plugin-emotion @emotion/babel-preset-css-prop
+
+** Serverless **
+# Gracias a serverless puedes realizar actividades solo un backend podría realizar como obtener datos de una BD.
+# Servicios más populares de serverless -> Google Firebase, Google Cloud, AWS,...
+
+** Google Firebase **
+# Firebase ofrece dos soluciones de bases de datos en la nube y accesibles ambas son en tiempo real.
+# Ambas son NoSQL como BD.
+# Realtime database -> es la solución original de Firebase en tiempo real.
+# Cloud firestore -> es la nueva BD. Es una versión mejorada de la versión original, un modelo de datos más intuitivo (JSON). Consultas rápidas y también en tiempo real.
+# Diferencias entre realtime y cloud firestore -> Cloud Firestore es la nueva BD, tendrá más funciones, rendimiento, escalabilidad, soporta grandes aplicaciones, más seguro,...
+# Datos -> Realtime DB: se almacenan los datos de forma muy anidada como JSON. Si los datos se almacenan en un gran árbol puede hacer que sea más difícil de organizar. Cloud Firestore: Se almacenan en un formato muy similar a JSON. Se pueden almacenar datos muy complejos de forma sencilla, con colecciones y subcolecciones en los documentos.
+# Soporte si conexión y tiempo real -> Realtime DB: solo soporta las plataformas iOS y Android sin conexión. Cloud Firestore: Soporta Android, iOS y plataformas web sin conexión. 
+# Consultas a BD -> Realtime DB: Solo se puede ordenar o filtrar según una propiedad. Si realizas una consulta de un registro, obtiene todo el árbol JSON completo. Cloud Firestore: Se pueden realizar diferentes filtros y ordenar por distintats condiciones. Puedes realizar consultas para subcolecciones en lugar del árbol completo.
+# npm install firebase -> para trabajar con react.
+# https://www.youtube.com/playlist?list=PLCKuOXG0bPi29EkcAuVCln9ISbExcQk66
+
+
+
